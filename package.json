@@ -1,7 +1,6 @@
 {
-  "name": "Assignment1",
+  "name": "a1",
   "version": "1.0.0",
-  "description": "",
   "main": "index.js",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1"
@@ -13,7 +12,8 @@
     "ramda": "^0.27.1"
   },
   "devDependencies": {
-    "@types/ramda": "^0.27.38",
+    "@types/ramda": "^0.27.39",
     "typescript": "^4.2.3"
-  }
+  },
+  "description": ""
 }
