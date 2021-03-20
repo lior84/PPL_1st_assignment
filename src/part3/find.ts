@@ -1,4 +1,9 @@
-import { Result, makeFailure, makeOk, bind, either } from "../lib/result";
+//import { ok } from "node:assert";
+import { prepend } from "ramda";
+import { Result, makeFailure, makeOk, bind, either, isOk } from "../lib/result";
+
+// ------------------------------------Part3--------------------------------------------
+
 
 /* Library code */
 const findOrThrow = <T>(pred: (x: T) => boolean, a: T[]): T => {
@@ -8,7 +13,17 @@ const findOrThrow = <T>(pred: (x: T) => boolean, a: T[]): T => {
     throw "No element found.";
 }
 
-export const findResult = undefined;
+
+// --------------------------------Quastion a------------------------------------------
+
+export const findResult = <T>(pred: (x: T) => boolean, a: T[]):Result<T>=> {
+    let b : T[] = a.filter(item => {return pred(item)});
+    if (b.length==0)
+    return makeFailure("No element found.");
+    else return makeOk(b[0]);
+}
+
+
 
 /* Client code */
 const returnSquaredIfFoundEven_v1 = (a: number[]): number => {
@@ -20,6 +35,20 @@ const returnSquaredIfFoundEven_v1 = (a: number[]): number => {
     }
 }
 
-export const returnSquaredIfFoundEven_v2 = undefined;
+// --------------------------------Quastion b------------------------------------------
 
-export const returnSquaredIfFoundEven_v3 = undefined;
+export const returnSquaredIfFoundEven_v2 =(a: number[]): Result<number> => {
+     try {
+         let r: Result<number>= bind(findResult( x => x % 2 === 0, a),y=>makeOk(y*y));
+         return r;
+    } catch (e) {
+        return makeFailure("No element found.");
+    }
+}
+
+// --------------------------------Quastion c------------------------------------------
+
+export const returnSquaredIfFoundEven_v3 :(a: number[])=> number = (a: number[]): number => {
+    let r: number= either(findResult( x => x % 2 === 0, a),y=>y*y, x=> -1);
+    return r;
+}

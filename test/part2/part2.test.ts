@@ -1,3 +1,4 @@
+// @ts-ignore
 import { expect } from "chai";
 import { countVowels, runLengthEncoding, isPaired } from "../../src/part2/part2";
 
